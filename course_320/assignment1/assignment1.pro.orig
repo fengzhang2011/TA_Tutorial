@@ -8,15 +8,7 @@ CONFIG   -= app_bundle
 
 QMAKE_CXXFLAGS += -std=c++0x
 
-
 TEMPLATE = app
-
-INCLUDEPATH += /scratch3/fzhang/tools/usr/include \
-		/scratch3/fzhang/tools/usr/include/c++/4.7.2 \
-		/scratch3/fzhang/tools/usr/include/c++/4.7.2/i686-linux-gnu \
-		/scratch3/fzhang/tools/usr/include/i386-linux-gnu
-
-LIBS += -L/scratch3/fzhang/tools/usr/lib/i386-linux-gnu -lpthread
 
 HEADERS += insultgenerator_netid.h
 SOURCES += insultgenerator_netid.cpp \
