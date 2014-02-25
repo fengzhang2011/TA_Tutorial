@@ -31,8 +31,8 @@ checkAllCINTestCases ( ) {
 	checkCINTestCase "4" "1/2\n1/2\n0\n" "1/1" "1"
 	# test case 5: -2/4 3/-4 => -5/4
 	checkCINTestCase "5" "-2/4\n3/-4\n0\n" "-5/4" "-5/4"
-	# test case 6: 1/-2 1/2 => 0/2
-	checkCINTestCase "6" "1/-2\n1/2\n0\n" "0/2" "0"
+	## test case 6: 1/-2 1/2 => 0/2
+	#checkCINTestCase "6" "1/-2\n1/2\n0\n" "0/2" "0"
 }
 
 checkResult ( ) {
@@ -41,15 +41,16 @@ checkResult ( ) {
 	`rm -rf .tmp_assignment_result`
 
 	# single check
-	singleCheck=`echo "$result" | grep "Should be" | sed 's/Should be "\(.\+\)":\s\+\(.\+\)/\1,\2/g' | sed 's/\s//g'`
-	singleCheckResult=`diff <(echo "$singleCheck" | cut -d , -f 1) <(echo "$singleCheck" | cut -d , -f 2 | sed 's/["\s]//g')`
+	singleCheck=`echo "$result" | grep "Should be" | sed 's/^\(.*\):\s*Should be "\(.\+\)":\s\+\(.\+\)/\1,\2,\3/g' | sed 's/\s//g'`
+	singleCheckResult=`diff <(echo "$singleCheck" | cut -d , -f 2) <(echo "$singleCheck" | cut -d , -f 3 | sed 's/["\s]//g')`
+	diffInSingleCheck=`echo "$singleCheck" | sed 's/"//g' | awk -F , '$2!=$3 {print $1 " expected: " $2 " but acutal is: " $3;}'`;
 	if [ -z "$singleCheckResult" ]
 		then
 			echo "PASSED # singleCheck";
 	else
-		echo "FAILED # singleCheck";
+		echo "FAILED # singleCheck. Details:";
+		echo "$diffInSingleCheck"
 	fi
-	#echo "$singleCheck";
 
 	# Exception check
 	#Exception message should indicate illegal denominator: Denominator cannot be zero!
