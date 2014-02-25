@@ -1,0 +1,14 @@
+QT       += core
+QT       -= gui
+
+TARGET = assignment2
+CONFIG   += console
+CONFIG   -= app_bundle
+
+QMAKE_CXXFLAGS += -std=c++0x
+
+TEMPLATE = app
+
+HEADERS += fraction_netid.h
+SOURCES += fraction_netid.cpp \
+	FractionTest.cpp
