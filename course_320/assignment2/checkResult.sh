@@ -6,7 +6,7 @@ checkCINTestCase ( ) {
 	input=$2		# input formula of the test case
 	expected=$3		# expected result of the formula
 	expectedALT=$3	# alternative expected result of the formula
-	ret=`printf -- "$input" | ./assignment2 | tail -n 1 | sed 's/.*Sum is: //g'`
+	ret=`printf -- "$input" | ./assignment2 | tail -n 1 | sed 's/.*Sum is: //g' | sed 's/"//g' | sed 's/\s//g'`
 	bCheckResult=`diff <(echo "$ret") <(echo "$expected")`
 	bCheckResultAlternative=`diff <(echo "$ret") <(echo "$expected")`
 	if [ -z "$bCheckResult" ]
@@ -16,7 +16,7 @@ checkCINTestCase ( ) {
 		then
 			echo "PASSED # TESTCASE $id.";
 	else
-		echo "FAILED # TESTCASE $id, due to $ret not $expected";
+		echo "FAILED # TESTCASE $id: expected is ($expected), but actual is ($ret)";
 	fi
 }
 
