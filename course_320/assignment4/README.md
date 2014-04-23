@@ -6,5 +6,5 @@
 3. execute the script to copy and repair files. "./copyFromSubmitted.sh"
 
 ## Check the assignment
-1. Check the compilation. "./checkCompile.sh"
-2. Check the solution. "./checkSolution.sh"
+1. Check the compilation. "./checkCompile.sh netid"
+2. Check the solution. "./checkSolution.sh netid"
